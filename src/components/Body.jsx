@@ -5,7 +5,7 @@ import getDirector from '../functions/Directors/getDirector'
 
 
 const Body = () => {
-    const [movies, setMovies] = useState(data)
+    const movies = data
     const [shows, setShows] = useState([])
 
     const addShow = (showForm, movie) => {
@@ -18,9 +18,7 @@ const Body = () => {
             directorId: movie.directorId,
             directorName: getDirector(movie.directorId)
         }
-        setShows(prevShows => {
-            return [...prevShows, newShow]
-        })
+        setShows(prevShows => [...prevShows, newShow])
     }
 
     const editShow = (showForm, showId) => {

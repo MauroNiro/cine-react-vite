@@ -1,5 +1,9 @@
 import { Button } from "react-bootstrap";
 const ShowsForm = ({ shows, movie, showForm, toggleForm, getShowSpec, handleDelete }) => {
+    const handleShowEditForm = (showId) => {
+        toggleForm();
+        getShowSpec(showId)
+    }
     const showsMovies = shows.filter(show => show.movieId === movie.movieId).map(show => {
         const showDate = new Date(show.date);
         const showMinute = showDate.getMinutes() < 10 ? "0" + showDate.getMinutes() : showDate.getMinutes();
@@ -14,7 +18,7 @@ const ShowsForm = ({ shows, movie, showForm, toggleForm, getShowSpec, handleDele
                 {
                     !showForm &&
                     <>
-                        <Button className="ms-1 mb-3 me-2" onClick={() => { toggleForm(); getShowSpec(show.showId) }}>Editar</Button>
+                        <Button className="ms-1 mb-3 me-2" onClick={() => { handleShowEditForm(show.showId) }}>Editar</Button>
                         <Button variant='secondary' className="mb-3" onClick={() => handleDelete(show.showId)}>Borrar</Button>
                     </>
                 }
