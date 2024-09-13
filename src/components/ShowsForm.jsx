@@ -115,6 +115,12 @@ const ShowsForm = ({ showModal, handleClose, handleAdd, handleEdit, handleDelete
         toggleForm();
         resetShowSpec()
     }
+    const removeQuantityError = () => {
+        setQuantityError(false)
+    }
+    const removeFormError = () => {
+        setFormError(false)
+    }
     return (
         <Modal show={showModal} onHide={handleHideModal}>
             <Modal.Header closeButton>
@@ -146,11 +152,11 @@ const ShowsForm = ({ showModal, handleClose, handleAdd, handleEdit, handleDelete
                     </Form>
                     <Modal.Footer>
                         {formError &&
-                            <Alert variant="danger" onClose={() => setFormError(false)} dismissible>
+                            <Alert variant="danger" onClose={removeQuantityError} dismissible>
                                 Error: La fecha debe ser en el futuro o el precio es menor o igual a cero.
                             </Alert>}
                         {quantityError &&
-                            <Alert variant="danger" onClose={() => setQuantityError(false)} dismissible>
+                            <Alert variant="danger" onClose={removeFormError} dismissible>
                                 Error: Ya alcanzo el limite de funciones para este tipo de peliculas en este dia.
                             </Alert>}
                         {editAddButtonForm()}
