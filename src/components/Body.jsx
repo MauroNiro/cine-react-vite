@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import Main from './Main';
 import getDirector from '../functions/Directors/getDirector'
-import postShow from '../api/PostShow';
-import putShow from '../api/PutShow';
 import deleteShowApi from '../api/DeleteShow';
 import { fetchDirectors, fetchShows, fetchMovies } from "../functions/fetchData"
 
