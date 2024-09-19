@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import validateQuantity from '../functions/Validations/validateShow';
 import Shows from './Shows'
+import postShow from '../api/PostShow';
+import putShow from '../api/PutShow';
 
 const ShowsForm = ({ showModal, handleClose, handleAdd, handleEdit, handleDelete, shows, movie }) => {
     //initializes states and make variables more accesible
@@ -47,13 +49,24 @@ const ShowsForm = ({ showModal, handleClose, handleAdd, handleEdit, handleDelete
         })
     }
     //addShow and editShow are made this way to close the toggle
-    const addShow = (showSpec, movie) => {
-        handleAdd(showSpec, movie)
-        toggleForm()
+    const addShow = async (showSpec, movie) => {
+        const response = await postShow(showSpec, movie.movieId)
+        if (response.showId > 0) {
+            handleAdd(showSpec, movie, response.showId)
+            toggleForm()
+        }
+        else {
+            setQuantityError(true)
+        }
     }
-    const editShow = (showSpec, showId) => {
-        handleEdit(showSpec, showId)
-        toggleForm()
+    const editShow = async (showSpec, showId) => {
+        if (await putShow(showSpec, showId)) {
+            handleEdit(showSpec, showId)
+            toggleForm()
+        }
+        else {
+            setQuantityError(true)
+        }
     }
     //buttons for add or edit in the form
     const editAddButtonForm = () => {
